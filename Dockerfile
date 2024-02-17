@@ -1,5 +1,5 @@
 FROM python:3.9-slim as base
-LABEL maintainer="Nick Balandin <balandin.nick@perm-rus.ru>"
+LABEL maintainer="Alex Prochorov <proch0r0v@yandex.ru>"
 
 # Сборка зависимостей
 ARG BUILD_DEPS="curl"
