@@ -1,27 +1,19 @@
-FROM python:3.9-slim as base
+FROM python:3.11.8
 LABEL maintainer="Alex Prochorov <proch0r0v@yandex.ru>"
 
-# Сборка зависимостей
-ARG BUILD_DEPS="curl"
-RUN apt-get update && apt-get install -y $BUILD_DEPS
+# switch working directory
+WORKDIR /app
 
-# Установка poetry
-RUN curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.0 POETRY_HOME=/root/poetry python3 -
-ENV PATH="${PATH}:/root/poetry/bin"
+# copy the requirements file into the image
+COPY ./requirements.txt /app/requirements.txt
 
-# Инициализация проекта
-WORKDIR /PycharmProjects/OTUS_Project
+# install the dependencies and packages in the requirements file
+RUN pip install -r requirements.txt
+# copy every content from the local file to the image
+COPY /app .
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# configure the container to run in an executed manner
+ENTRYPOINT ["python"]
+#Runapp
+CMD ["app.py"]
 
-# Установка питонячьих библиотек
-COPY poetry.lock pyproject.toml /
-RUN poetry config virtualenvs.create false && \
-    poetry install --no-interaction --no-ansi
-
-# Копирование в контейнер папок и файлов.
-COPY . .
-
-# Команда запуска
-CMD ["uvicorn", "app.webapp:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
