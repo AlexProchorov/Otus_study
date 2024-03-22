@@ -1,0 +1,26 @@
+{% extends 'otus_app/layout.html' %}
+
+
+{% block content %}
+
+
+<div style="margin-top: 50px;" class="ui container">
+    <h1 class="ui center aligned header">Cписок пользователей "Онлайн-мороженного"</h1>
+    <h3 class="test_style">Внести изменения</h3>
+    <form class="ui form" action="{% url 'uprec' users.ID %}" method="post">  {% csrf_token %}
+
+        <div class="field">
+            <label>Текущий пользователь №{{users.ID}}</label>
+            <input type="number" readonly name="ID" value = "{{ users.ID}}" placeholder="ID"><br>
+            <input type="text" name="UserName" value = "{{ users.UserName}}" placeholder="UserName"><br>
+            <input type="text" name="FirstName" value = "{{ users.FirstName}}" placeholder="FirstName"><br>
+            <input type="text" name="LastName" value = "{{ users.LastName}}" placeholder="LastName"><br>
+            <input type="text" name="Email" value = "{{ users.Email}}" placeholder="Email"><br>
+            <input type="text" name="Phone" value = "{{ users.Phone}}" placeholder="Phone"><br>
+        </div>
+        <button class="ui teal basic button" type="submit">Сохранить</button>
+    </form>
+
+
+</div>
+{% endblock content %}

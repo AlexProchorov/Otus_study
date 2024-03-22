@@ -1,0 +1,47 @@
+{% extends 'otus_app/layout.html' %}
+
+{% block content %}
+
+
+
+<div style="margin-top: 50px;" class="ui container">
+    <h1 class="ui center aligned header">Cписок пользователей "Онлайн-мороженного"</h1>
+    <h3 class="test_style">Внести изменения</h3>
+    <form class="ui form" action="{% url 'add' %}" method="post"> {% csrf_token %}
+
+        <div class="field">
+
+
+            <label>Новый пользователь</label>
+            <input type="number" name="ID"  placeholder="ID"><br>
+            <input type="text" name="UserName"  placeholder="UserName"><br>
+            <input type="text" name="FirstName"  placeholder="FirstName"><br>
+            <input type="text" name="LastName"  placeholder="LastName"><br>
+            <input type="text" name="Email"  placeholder="Email"><br>
+            <input type="text" name="Phone"  placeholder="Phone"><br>
+        </div>
+        <button class="ui teal basic button" type="submit">Добавить</button>
+    </form>
+
+{% for el in user_list %}
+<div class="ui segment">
+       <p class="ui big header">№{{ el.ID }} {{ el.UserName }}</p>
+       <p class="ui big header">{{ el.FirstName }} {{ el.LastName }}</p>
+       <p class="ui big header">{{ el.Email }} {{ el.Phone }}</p>
+
+
+        {% if el.ID is not None %}
+        <a class="ui negative basic button" href="{% url 'delete' el.ID %}">Удалить</a>
+        <a class="ui positive basic button" href="{% url 'update' el.ID %}">Редактировать</a>
+        {% endif %}
+
+</div>
+    {% endfor %}
+
+
+
+
+
+
+</div>
+{% endblock content %}

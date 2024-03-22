@@ -1,0 +1,37 @@
+version: '1.2'
+services:
+  otus_app:
+    container_name: otus_result_homework
+    image: rooover/otus_app_django_34
+    build: .
+    depends_on:
+      -  bata_base_pg
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    networks:
+      - host
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#command: ["python","./manage.py","runserver", "0.0.0.0:8000" ]
+
+
+  bata_base_pg:
+    container_name: pgadmin_container
+    image: postgres:14
+    volumes:
+       - ~/.pg/pg_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - "${PGADMIN_PORT:-5432}:80"
+    restart: unless-stopped
+    networks:
+      - host
+volumes:
+    pgadmin:
+      driver: local
+networks:
+  host:
+    driver: bridge

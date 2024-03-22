@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-project-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: otus-project-app
+      env: prod
+  template:
+    metadata:
+      labels:
+        app: otus-project-app
+        env: prod
+
+    spec:
+      containers:
+        - name: otus-project-app
+          image: rooover/otus_app_django_46:04
+          imagePullPolicy: Always
+          command: ["python","./manage.py","runserver", "0.0.0.0:8000" ]
+          ports:
+            - name: http
+              containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: django-secrets
+            - configMapRef:
+                name: django-config
+
