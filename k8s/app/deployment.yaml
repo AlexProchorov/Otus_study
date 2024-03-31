@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: otus-project-app
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: otus-project-app
@@ -17,9 +17,9 @@ spec:
     spec:
       containers:
         - name: otus-project-app
-          image: rooover/otus_app_django_46:04
+          image: rooover/otus_app_django_46:10
           imagePullPolicy: Always
-          command: ["python","./manage.py","runserver", "0.0.0.0:8000" ]
+          command: ["python","./manage.py","runserver" ]
           ports:
             - name: http
               containerPort: 8000

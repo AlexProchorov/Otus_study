@@ -37,11 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api.apps.ApiConfig',
+    "django_prometheus",
     "phonenumber_field",
     'users',
 ]
 
 MIDDLEWARE = [
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,7 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_prometheus.middleware.PrometheusAfterMiddleware"
 ]
+
+PROMETHEUS_EXPORT_MIGRATIONS = False
 
 ROOT_URLCONF = 'otus_app.urls'
 
@@ -77,7 +84,7 @@ WSGI_APPLICATION = 'otus_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django_prometheus.db.backends.postgresql',
         'HOST': os.getenv("POSTGRES_HOST", "localhost"),
         'PORT': os.getenv("POSTGRES_PORT", 5432),
         'USER': os.getenv("POSTGRES_USER", 'postgres'),

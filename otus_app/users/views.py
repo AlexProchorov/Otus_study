@@ -13,14 +13,14 @@ def index(request):
 
 @require_http_methods(['POST'])
 def add(request):
-    ID = request.POST['ID']
+
     UserName = request.POST['UserName']
     FirstName = request.POST['FirstName']
     LastName = request.POST['LastName']
     Email = request.POST['Email']
     Phone = request.POST['Phone']
 
-    user = Users_info(ID=ID,
+    user = Users_info(
                       UserName=UserName,
                       FirstName=FirstName,
                       LastName=LastName,
@@ -42,7 +42,6 @@ def update(request, ID):
     return render(request,"otus_app/update.html",{'users': users})
 
 def uprec(request, ID):
-    ID = request.POST['ID']
     UserName = request.POST['UserName']
     FirstName = request.POST['FirstName']
     LastName = request.POST['LastName']

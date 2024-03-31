@@ -21,5 +21,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
 
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
+    path('', include("django_prometheus.urls")),
     path('', include('users.urls'))
 ]

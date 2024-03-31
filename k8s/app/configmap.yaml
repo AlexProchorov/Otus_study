@@ -5,6 +5,6 @@ metadata:
 data:
   DEBUG: 'True'
   POSTGRES_DB: 'postgres'
-  POSTGRES_HOST: '10.109.38.21'
+  POSTGRES_HOST: '10.103.169.76'
   POSTGRES_PORT: '5432'
 

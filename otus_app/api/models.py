@@ -10,8 +10,8 @@ class Users_info(models.Model):
         UserName = models.CharField('UserName',max_length=255)
         FirstName = models.CharField('FirstName', max_length=255)
         LastName = models.CharField('LastName', max_length=255)
-        Email = models.CharField('Email', max_length=255)
-        Phone = PhoneNumberField('Phone',unique=True, null=False, blank=False)
+        Email = models.CharField('Email', max_length=255, blank=True)
+        Phone = PhoneNumberField('Phone', null=True, blank=True)
 
         #objects = models.Manager()
 
@@ -19,10 +19,12 @@ class Users_info(models.Model):
             verbose_name_plural = "Пользователи"
 
 
-        def __str__(self):
+        def __str__(self) -> str:
              #return f'{[self.ID,self.UserName, self.FirstName, self.LastName, self.Email]!r}'
              return self.FirstName
                     # self.FirstName,
                     # self.LastName,
                     # self.Email,
                     # self.Phone)
+
+
