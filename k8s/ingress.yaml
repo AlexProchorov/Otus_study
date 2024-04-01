@@ -2,11 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: otus-project-app
+  namespace: otus-project-app
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
+  ingressClassName: nginx
   rules:
     - host: arch.homework
       http:
@@ -17,7 +21,7 @@ spec:
               service:
                 name: otus-project-app
                 port:
-                  number: 80
+                  number: 8000
 
 
 

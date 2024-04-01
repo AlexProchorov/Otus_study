@@ -88,8 +88,8 @@ DATABASES = {
         'HOST': os.getenv("POSTGRES_HOST", "localhost"),
         'PORT': os.getenv("POSTGRES_PORT", 5432),
         'USER': os.getenv("POSTGRES_USER", 'postgres'),
-        'PASSWORD': os.getenv("POSTGRES_PASSWORD",'12344321'),
-        'NAME': os.getenv("POSTGRES_DB","postgres")
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD", '12344321'),
+        'NAME': os.getenv("POSTGRES_DB", "postgres")
 
 
     }
@@ -131,7 +131,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = 'static'
+if os.getenv("STATIC_ROOT"):
+    STATIC_ROOT = os.getenv("STATIC_ROOT")
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

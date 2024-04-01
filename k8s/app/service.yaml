@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: otus-project-app
+  namespace: otus-project-app
 spec:
   type: ClusterIP
   selector:
@@ -9,7 +10,7 @@ spec:
     env: prod
   ports:
     - protocol: TCP
-      port: 80
+      port: 8000
       targetPort: 8000
 
 

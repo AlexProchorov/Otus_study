@@ -1,36 +1,31 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: otus-project-app
+  name: django-staticfiles
   namespace: otus-project-app
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: otus-project-app
-      env: prod
-  template:
-    metadata:
-      labels:
-        app: otus-project-app
-        env: prod
+  ttlSecondsAfterFinished: 100
+  activeDeadlineSeconds: 60
 
+  template:
     spec:
       volumes:
         - name: staticfiles
           persistentVolumeClaim:
             claimName: staticfiles-pvc
       containers:
-        - name: otus-project-app
+        - name: staticfiles-container
           image: rooover/otus_app_django_46:12
+          command: ['python', 'manage.py','collectstatic','--noinput']
           imagePullPolicy: Always
           envFrom:
-            - configMapRef:
-                name: app-cm
+           - configMapRef:
+              name:
+                app-cm
           ports:
-            - name: http
-              containerPort: 8000
+            - containerPort: 8000
           volumeMounts:
             - mountPath: "/data/static"
               name: staticfiles
-
+      restartPolicy: OnFailure
+  backoffLimit: 3

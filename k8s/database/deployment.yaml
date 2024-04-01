@@ -2,51 +2,30 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
+  namespace: otus-project-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
-      env: prod
+      app: postgresdb
   template:
     metadata:
       labels:
-        app: postgres
-        env: prod
-
+        app: postgresdb
     spec:
       containers:
         - name: postgresdb
-          image: postgres
-          imagePullPolicy: "IfNotPresent"
+          image: postgres:14.0
           ports:
             - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secrets
-                  key: database
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secrets
-                  key: username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secrets
-                  key: password
+          envFrom:
+            - configMapRef:
+                name: db-secret-credentials
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgresdb
-            - name: postgres-secrets
-              mountPath: "/etc/postgres-secrets"
-              readOnly: true
+            - mountPath: /var/lib/postgres/data
+              name: db-data
       volumes:
-        - name: postgresdb
+        - name: db-data
           persistentVolumeClaim:
             claimName: postgres-pvc
-        - name: postgres-secrets
-          secret:
-            secretName: postgres-secrets
+

@@ -17,6 +17,6 @@ RUN mkdir /otus_app/static
 #RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 # configure the container to run in an executed manner
-CMD ["gunicorn", "django_kubernetes_tutorial.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "otus_app.wsgi:application", "--bind", "0.0.0.0:8000"]
 
 
