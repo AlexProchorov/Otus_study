@@ -15,7 +15,7 @@ spec:
             claimName: staticfiles-pvc
       containers:
         - name: staticfiles-container
-          image: rooover/otus_app_django_46:12
+          image: rooover/otus_app_django_46:13
           command: ['python', 'manage.py','collectstatic','--noinput']
           imagePullPolicy: Always
           envFrom:

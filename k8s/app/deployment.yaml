@@ -22,7 +22,7 @@ spec:
             claimName: staticfiles-pvc
       containers:
         - name: otus-project-app
-          image: rooover/otus_app_django_46:12
+          image: rooover/otus_app_django_46:13
           imagePullPolicy: Always
           envFrom:
             - configMapRef:

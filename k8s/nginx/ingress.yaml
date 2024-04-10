@@ -19,9 +19,8 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: otus-project-app
+                name: otusapp
                 port:
-                  number: 8000
-
+                  number: 80
 
 
