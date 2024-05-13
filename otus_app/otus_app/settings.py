@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'api.apps.ApiConfig',
     'accounts',
-    "django_prometheus",
+    'django_prometheus',
+    'billing',
+    'order'
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'

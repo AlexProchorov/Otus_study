@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: migration-container
-          image: rooover/otus_app_django_46:13
+          image: rooover/otus_app_django_50:01
           command: ['python','manage.py','migrate']
           imagePullPolicy: Always
           envFrom:
