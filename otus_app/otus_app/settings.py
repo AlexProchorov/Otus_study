@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'accounts',
     'django_prometheus',
     'billing',
-    'order'
+    'order',
+    'storage',
+    'delivery'
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -101,7 +103,8 @@ DATABASES = {
         'PORT': os.getenv("POSTGRES_PORT", 5432),
         'USER': os.getenv("POSTGRES_USER", 'postgres'),
         'PASSWORD': os.getenv("POSTGRES_PASSWORD", '12344321'),
-        'NAME': os.getenv("POSTGRES_DB", "postgres")
+        'NAME': os.getenv("POSTGRES_DB", "postgres"),
+        'ATOMIC_REQUESTS': True
 
 
     }

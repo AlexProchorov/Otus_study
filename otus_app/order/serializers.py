@@ -6,7 +6,7 @@ from .models import Orders
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
-        fields = ['OrderID', 'UserName', 'UserID','Amount','IsPayed']
+        fields = ['OrderID', 'UserName', 'UserID','Amount','IsPayed','Product_id','Counts_product']
 
     def update (self,instance,validate_date):
         instance.IsPayed = validate_date.get('IsPayed',instance.IsPayed)

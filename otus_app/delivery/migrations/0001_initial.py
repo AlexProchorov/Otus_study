@@ -12,15 +12,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Orders',
+            name='Delivery',
             fields=[
                 ('OrderID', models.AutoField(primary_key=True, serialize=False, verbose_name='OrderID')),
                 ('UserName', models.CharField(max_length=255, verbose_name='UserName')),
                 ('UserID', models.IntegerField(blank=True, null=True, verbose_name='UserID')),
-                ('Amount', models.IntegerField(blank=True, null=True, verbose_name='Amount')),
                 ('Product_id', models.IntegerField(blank=True, null=True, verbose_name='Product_id')),
-                ('Counts_product', models.IntegerField(blank=True, null=True, verbose_name='Counts')),
-                ('IsPayed', models.BooleanField(default=False)),
                 ('DateTime', models.DateTimeField(blank=True, null=True, verbose_name='DateTime')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),

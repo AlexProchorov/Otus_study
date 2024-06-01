@@ -21,10 +21,13 @@ def depositmoney(request,pk):
         request.POST._mutable = True
         a = request.data['SumCount']
         request.data['SumCount'] = before_adding + a
+        request.data['Message'] = 'Баланс пополнен успешно'
         serializer = BillingSerializer(instance=user, data=request.data)
+
 
         if serializer.is_valid():
             serializer.save()
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -68,8 +71,6 @@ def payfororder(request,pk):
                 obj = Orders.objects.get(UserID=pk)
                 obj.IsPayed = True
                 obj.save()
-
-
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
